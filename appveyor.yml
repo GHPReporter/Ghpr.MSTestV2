@@ -38,10 +38,10 @@
     - nuget
     
   before_build:
-    - nuget restore Ghpr.MSTest/Ghpr.MSTestV2.sln
+    - nuget restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
 
   build_script: 
-    - msbuild Ghpr.MSTest/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
+    - msbuild Ghpr.MSTestV2/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
 
   test:
     assemblies:
