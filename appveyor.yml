@@ -10,7 +10,7 @@
     - msbuild Ghpr.MSTestV2/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
 
   after_build:
-    - nuget pack "Ghpr.MSTestV2/Ghpr.MSTestV2.csproj" -Prop Configuration=Release
+    - nuget pack "Ghpr.MSTestV2/Ghpr.MSTestV2/Ghpr.MSTestV2.csproj" -Prop Configuration=Release
 
   artifacts:
     - path: '*.nupkg'
