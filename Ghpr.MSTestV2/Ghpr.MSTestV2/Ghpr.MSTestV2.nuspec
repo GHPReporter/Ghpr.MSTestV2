@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/GHPReporter/Ghpr.MSTestV2/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/GHPReporter/Ghpr.MSTestV2</projectUrl>
+    <iconUrl>https://github.com/GHPReporter/GHPReporter.github.io/blob/master/img/logo-small.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Easy-to-use test run reporter for MSTestV2</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright Evgeniy Kosjakov © 2016-2018</copyright>
+    <tags>.NET QA package HTML report reporting testing tool framework MSTestV2</tags>
+	  <dependencies>
+		  <dependency id="Ghpr.Core" version="0.8.1.0" />
+	  </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Ghpr.MSTestV2.dll" target="lib" />
+	  <file src="bin\Release\Ghpr.MSTest.SettingsV2.json" target="content" />
+  </files>
+</package>
