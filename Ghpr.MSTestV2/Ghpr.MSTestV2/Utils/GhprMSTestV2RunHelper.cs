@@ -13,7 +13,7 @@ namespace Ghpr.MSTestV2.Utils
     {
         public static void CreateReportFromFile(string path, ITestDataProvider dataProvider)
         {
-            var reporter = ReporterFactory.Build(TestingFramework.MSTest, dataProvider);
+            var reporter = ReporterFactory.Build(TestingFramework.MSTestV2, dataProvider);
             try
             {
                 var testRuns = GetTestRunsListFromFile(path);
