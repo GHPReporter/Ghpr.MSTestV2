@@ -2,18 +2,18 @@
 
 using System;
 using System.Collections.Generic;
-using Ghpr.Core;
+using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
-using Ghpr.Core.Utils;
+using Ghpr.Core.Factories;
 using Ghpr.Core.Interfaces;
 
 namespace Ghpr.MSTestV2.Utils
 {
     public class GhprMSTestV2RunHelper
     {
-        public static void CreateReportFromFile(string path)
+        public static void CreateReportFromFile(string path, ITestDataProvider dataProvider)
         {
-            var reporter = new Reporter(TestingFramework.MSTest);
+            var reporter = ReporterFactory.Build(TestingFramework.MSTest, dataProvider);
             try
             {
                 var testRuns = GetTestRunsListFromFile(path);
@@ -21,26 +21,15 @@ namespace Ghpr.MSTestV2.Utils
             }
             catch (Exception ex)
             {
-                var log = new Log(reporter.Settings.OutputPath);
-                log.Exception(ex, "Exception in CreateReportFromFile");
+                reporter.Logger.Exception("Exception in CreateReportFromFile", ex);
             }
         }
 
-        public static List<ITestRun> GetTestRunsListFromFile(string path)
+        public static List<KeyValuePair<TestRunDto, TestOutputDto>> GetTestRunsListFromFile(string path)
         {
-            try
-            {
-                var reader = new TrxReader(path);
-                var testRuns = reader.GetTestRuns();
-                return testRuns;
-            }
-            catch (Exception ex)
-            {
-                var reporter = new Reporter(TestingFramework.MSTest);
-                var log = new Log(reporter.Settings.OutputPath);
-                log.Exception(ex, "Exception in GetTestRunsListFromFile");
-                return null;
-            }
+            var reader = new TrxReader(path);
+            var testRuns = reader.GetTestRuns();
+            return testRuns;
         }
     }
 }
