@@ -18,6 +18,8 @@ namespace Ghpr.MSTestV2.Utils
             {
                 var testRuns = GetTestRunsListFromFile(path);
                 reporter.GenerateFullReport(testRuns);
+                reporter.CleanUpJob();
+                reporter.TearDown();
             }
             catch (Exception ex)
             {
