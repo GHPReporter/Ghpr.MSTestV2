@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghpr.MSTestV2", "Ghpr.MSTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsForDebug", "TestsForDebug\TestsForDebug.csproj", "{180CF46A-C805-4F8D-81BD-A4F4DC85D372}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppForDebug", "ConsoleAppForDebug\ConsoleAppForDebug.csproj", "{F4AB5B09-5309-4308-A5DF-4FDD615DE684}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{180CF46A-C805-4F8D-81BD-A4F4DC85D372}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{180CF46A-C805-4F8D-81BD-A4F4DC85D372}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{180CF46A-C805-4F8D-81BD-A4F4DC85D372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4AB5B09-5309-4308-A5DF-4FDD615DE684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4AB5B09-5309-4308-A5DF-4FDD615DE684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4AB5B09-5309-4308-A5DF-4FDD615DE684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4AB5B09-5309-4308-A5DF-4FDD615DE684}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
