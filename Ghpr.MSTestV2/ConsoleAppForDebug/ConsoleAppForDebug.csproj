@@ -60,6 +60,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Ghpr.Core.Settings.json" />
+    <None Include="Ghpr.MSTestV2.Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
+using Ghpr.Core.Extensions;
 
 namespace Ghpr.MSTestV2
 {
@@ -36,18 +37,25 @@ namespace Ghpr.MSTestV2
             {
                 var start = DateTime.Parse(utr.GetAttrVal("startTime"));
                 var finish = DateTime.Parse(utr.GetAttrVal("endTime"));
-                var testGuid = utr.GetAttrVal("testId") ?? Guid.NewGuid().ToString();
+                var internalTestGuid = utr.GetAttrVal("testId") ?? Guid.NewGuid().ToString();
+                
+                var testName = utr.GetAttrVal("testName");
+                var ut = uts?.FirstOrDefault(node => (node.GetAttrVal("id") ?? "").Equals(internalTestGuid));
+
+                if (utr.FirstChild != null && utr.FirstChild.Name.Equals("InnerResults"))
+                {
+                    continue;
+                }
+
+                var tm = ut?.GetNode("TestMethod");
+                var testDesc = ut?.GetNode("Description")?.InnerText;
+                var testFullName = (tm?.GetAttrVal("className") ?? "").Split(',')[0] + "." + testName;
                 var testInfo = new ItemInfoDto
                 {
                     Start = start,
                     Finish = finish,
-                    Guid = Guid.Parse(testGuid)
+                    Guid = testFullName.ToMd5HashGuid()
                 };
-                var testName = utr.GetAttrVal("testName");
-                var ut = uts?.FirstOrDefault(node => (node.GetAttrVal("id") ?? "").Equals(testGuid));
-                var tm = ut?.GetNode("TestMethod");
-                var testDesc = ut?.GetNode("Description")?.InnerText;
-                var testFullName = (tm?.GetAttrVal("className") ?? "").Split(',')[0] + "." + testName;
                 var result = utr.GetAttrVal("outcome");
                 var output = utr.GetNode("Output")?.GetNode("StdOut")?.InnerText ?? "";
                 var msg = utr.GetNode("Output")?.GetNode("ErrorInfo")?.GetNode("Message")?.InnerText ?? "";
