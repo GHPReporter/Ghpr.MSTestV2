@@ -14,6 +14,7 @@
 [![Language](http://gh-toprated.info/Badges/LanguageBadge?user=GHPReporter&repo=Ghpr.MSTestV2&theme=light&fontWeight=bold)](https://github.com/GHPReporter/Ghpr.MSTestV2)
 [![Build status](https://ci.appveyor.com/api/projects/status/0surlhjtkckdiw18?svg=true)](https://ci.appveyor.com/project/elv1s42/ghpr-mstestv2)
 [![NuGet Version](https://img.shields.io/nuget/v/Ghpr.MSTestV2.svg)](https://www.nuget.org/packages/Ghpr.MSTestV2)
+[![CodeFactor](https://www.codefactor.io/repository/github/ghpreporter/ghpr.mstestv2/badge)](https://www.codefactor.io/repository/github/ghpreporter/ghpr.mstestv2)
 
 # Ghpr.MSTestV2
 
