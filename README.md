@@ -11,9 +11,10 @@
   <a href="https://github.com/GHPReporter/GHPReporter.github.io/">Site Repo</a>
 </p>
 
-[![Language](http://gh-toprated.info/Badges/LanguageBadge?user=GHPReporter&repo=Ghpr.MSTestV2&theme=light&fontWeight=bold)](https://github.com/GHPReporter/Ghpr.MSTestV2)
 [![Build status](https://ci.appveyor.com/api/projects/status/0surlhjtkckdiw18?svg=true)](https://ci.appveyor.com/project/elv1s42/ghpr-mstestv2)
 [![NuGet Version](https://img.shields.io/nuget/v/Ghpr.MSTestV2.svg)](https://www.nuget.org/packages/Ghpr.MSTestV2)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4e8c09bf4b2c4bd49683fa52b63af81b)](https://www.codacy.com/app/GHPReporter/Ghpr.MSTestV2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GHPReporter/Ghpr.MSTestV2&amp;utm_campaign=Badge_Grade)
+[![CodeFactor](https://www.codefactor.io/repository/github/ghpreporter/ghpr.mstestv2/badge)](https://www.codefactor.io/repository/github/ghpreporter/ghpr.mstestv2)
 
 # Ghpr.MSTestV2
 
