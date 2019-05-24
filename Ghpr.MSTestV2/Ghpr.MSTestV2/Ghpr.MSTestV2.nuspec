@@ -15,8 +15,8 @@
     <copyright>Copyright Evgeniy Kosjakov © 2016-2019</copyright>
     <tags>.NET QA package HTML report reporting testing tool framework MSTestV2</tags>
 	  <dependencies>
-	    <dependency id="Ghpr.Core" version="0.9.4.0" />
-	    <dependency id="Ghpr.LocalFileSystem" version="0.9.4.0" />
+	    <dependency id="Ghpr.Core" version="0.9.9.0" />
+	    <dependency id="Ghpr.LocalFileSystem" version="0.9.9.0" />
 	    <dependency id="MSTest.TestAdapter" version="1.4.0.0" />
 	    <dependency id="MSTest.TestFramework" version="1.4.0.0" />
 	  </dependencies>

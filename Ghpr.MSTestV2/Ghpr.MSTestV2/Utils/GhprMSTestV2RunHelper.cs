@@ -1,6 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Ghpr.Core.Common;
 using Ghpr.Core.Enums;
@@ -13,7 +11,7 @@ namespace Ghpr.MSTestV2.Utils
     {
         public static void CreateReportFromFile(string path, ITestDataProvider dataProvider)
         {
-            var reporter = ReporterFactory.Build(TestingFramework.MSTestV2, dataProvider);
+            var reporter = ReporterFactory.Build(TestingFramework.MSTestV2, dataProvider, path);
             try
             {
                 var testRuns = GetTestRunsListFromFile(path);
