@@ -1,78 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3E9BE3A-820D-457F-AC48-AAD2D11F7EAF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ghpr.MSTestV2</RootNamespace>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;net45;net451;net452;net46;net461;net462;net47;net471;net472</TargetFrameworks>
     <AssemblyName>Ghpr.MSTestV2</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <RootNamespace>Ghpr.MSTestV2</RootNamespace>
+    <DebugType>Full</DebugType>
+    <AssemblyVersion>0.9.9.1</AssemblyVersion>
+    <FileVersion>0.9.9.1</FileVersion>
+    <NeutralLanguage />
+    <Version>0.9.9.1</Version>
+    <Authors>Evgeniy Kosjakov</Authors>
+    <Company>GhpReporter</Company>
+    <PackageLicenseUrl>https://github.com/GHPReporter/Ghpr.Core/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>http://ghpreporter.github.io/</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/GHPReporter/GHPReporter.github.io/blob/master/img/logo-small.png?raw=true</PackageIconUrl>
+    <PackageReleaseNotes>https://github.com/GHPReporter/Ghpr.Core/blob/master/RELEASE_NOTES.md</PackageReleaseNotes>
+    <RepositoryType />
+    <RepositoryUrl>https://github.com/GHPReporter/Ghpr.MSTestV2</RepositoryUrl>
+    <Copyright>Copyright Evgeniy Kosjakov © 2016-2019</Copyright>
+    <Description>Easy-to-use test run reporter for MSTest.TestFramework</Description>
+    <PackageTags>.NET QA package HTML report reporting testing tool framework MSTest TestFramework DotNet</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ghpr.Core, Version=0.9.9.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ghpr.Core.0.9.9.1\lib\net452\Ghpr.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Ghpr.LocalFileSystem, Version=0.9.9.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ghpr.LocalFileSystem.0.9.9.2\lib\net452\Ghpr.LocalFileSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Ghpr.Core" Version="0.9.9.1" />
+    <PackageReference Include="Ghpr.LocalFileSystem" Version="0.9.9.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrxReader.cs" />
-    <Compile Include="Utils\GhprMSTestV2RunHelper.cs" />
-    <Compile Include="XmlExtensions.cs" />
+    <Content Include="Ghpr.Core.Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ghpr.MSTestV2.Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Ghpr.Core.Settings.json" />
-    <None Include="Ghpr.MSTestV2.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Ghpr.MSTestV2.Settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
