@@ -4,16 +4,16 @@
     - nuget
     
   before_build:
-    - nuget restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
+    - dotnet restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
 
   build_script: 
-    - msbuild Ghpr.MSTestV2/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
+    - dotnet build Ghpr.MSTestV2/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
 
   after_build:
-    - nuget pack "Ghpr.MSTestV2/Ghpr.MSTestV2/Ghpr.MSTestV2.csproj" -Prop Configuration=Release
+    - dotnet pack -c Release "Ghpr.MSTestV2/Ghpr.MSTestV2/Ghpr.MSTestV2.csproj" /p:NuspecFile="Ghpr.MSTestV2.nuspec"
 
   artifacts:
-    - path: '*.nupkg'
+    - path: '**\*.nupkg'
       name: nupkg
 
   deploy:
@@ -38,10 +38,10 @@
     - nuget
     
   before_build:
-    - nuget restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
+    - dotnet restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
 
   build_script: 
-    - msbuild Ghpr.MSTestV2/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
+    - dotnet build Ghpr.MSTestV2/Ghpr.MSTestV2.sln /p:Configuration=Release /t:Rebuild
 
   test:
     assemblies:
