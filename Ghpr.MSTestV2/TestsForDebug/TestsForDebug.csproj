@@ -15,6 +15,6 @@
     <PackageReference Include="Ghpr.Core" Version="0.9.9.1" />
     <PackageReference Include="Ghpr.LocalFileSystem" Version="0.9.9.2" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
   </ItemGroup>
 </Project>
