@@ -2,7 +2,9 @@
   branches:
     only:
     - nuget
-    
+
+  image: Visual Studio 2019
+
   before_build:
     - dotnet restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
 
@@ -23,7 +25,7 @@
       secure: crLYbWXNgfrzYazkV18cEBRKnl90ee0wjWUfZGIDhkZcZg1ZlGbbsqRdr8JLmU3O
     skip_symbols: false
     artifact: nupkg
- 
+
   test:
     assemblies:
       - '**\*TestsExample.dll'
@@ -36,7 +38,9 @@
   branches:
     except:
     - nuget
-    
+
+  image: Visual Studio 2019
+
   before_build:
     - dotnet restore Ghpr.MSTestV2/Ghpr.MSTestV2.sln
 
