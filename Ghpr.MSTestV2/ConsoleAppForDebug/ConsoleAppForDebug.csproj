@@ -8,6 +8,9 @@
     <Version>0.9.9.1</Version>
     <Authors>Evgeniy Kosjakov</Authors>
     <Company>GhpReporter</Company>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConsoleAppForDebug": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Evgeniy.Kosjakov\\Documents\\GitHub\\Ghpr.MSTestV2\\Ghpr.MSTestV2\\TestsForDebug\\TestResults\\Evgeniy.Kosjakov_UNIT-1248_2019-10-25_19_54_47.trx"
+    }
+  }
+}
