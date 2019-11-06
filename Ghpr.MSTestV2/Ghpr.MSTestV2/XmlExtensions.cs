@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -56,6 +57,17 @@ namespace Ghpr.MSTestV2
         public static string GetAttrVal(this XmlNode node, string attr)
         {
             return node.Attributes?[attr]?.Value;
+        }
+
+        public static DateTime GetDateTimeVal(this XmlNode node, string attr)
+        {
+            var sValue = node.GetAttrVal(attr) ?? "";
+            var success = DateTime.TryParse(sValue, out var date);
+            if (!success)
+            {
+                date = new DateTime();
+            }
+            return date;
         }
     }
 }
