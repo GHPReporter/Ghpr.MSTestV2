@@ -97,7 +97,6 @@ namespace Ghpr.MSTestV2
                                       $"{e.StackTrace}{Environment.NewLine}" +
                                       $"The test XML node is:{Environment.NewLine}" +
                                       $"{utr.OuterXml}");
-                    throw;
                 }
             }
 
