@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Ghpr.MSTestV2</id>
-    <version>0.9.9.9</version>
+    <version>0.9.10</version>
     <title>Ghpr.MSTestV2</title>
     <authors>Evgeniy Kosjakov</authors>
     <owners>Evgeniy Kosjakov</owners>
