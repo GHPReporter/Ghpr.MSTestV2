@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using Ghpr.Core.Common;
 using Ghpr.Core.Extensions;
+using Ghpr.MSTestV2.Utils;
 
 namespace Ghpr.MSTestV2
 {
     public class TrxReader
     {
         private readonly XmlDocument _xml;
+        private readonly string _trxFullPath;
 
         public TrxReader(string fullPath)
         {
             _xml = XmlExtensions.GetDoc(fullPath);
+            _trxFullPath = fullPath;
         }
 
         public string GetRunGuid()
@@ -21,9 +25,10 @@ namespace Ghpr.MSTestV2
             return _xml.GetNode("TestRun").GetAttrVal("id");
         }
 
-        public List<KeyValuePair<TestRunDto, TestOutputDto>> GetTestRuns()
+        public List<GhprTestCase> GetTestRuns()
         {
-            var testRuns = new List<KeyValuePair<TestRunDto, TestOutputDto>>();
+            var testRuns = new List<GhprTestCase>();
+            var deploymentFolder = _xml.GetNode("TestSettings")?.GetNode("Deployment")?.GetAttrVal("runDeploymentRoot");
             var utrs = _xml.GetNodesList("UnitTestResult");
             var uts = _xml.GetNode("TestDefinitions")?.GetNodesList("UnitTest");
 
@@ -37,6 +42,7 @@ namespace Ghpr.MSTestV2
             {
                 try
                 {
+                    var executionId = utr.GetAttrVal("executionId");
                     var start = utr.GetDateTimeVal("startTime");
                     var finish = utr.GetDateTimeVal("endTime");
                     var internalTestGuid = utr.GetAttrVal("testId") ?? Guid.NewGuid().ToString();
@@ -52,17 +58,19 @@ namespace Ghpr.MSTestV2
                     var tm = ut?.GetNode("TestMethod");
                     var testDesc = ut?.GetNode("Description")?.InnerText;
                     var testFullName = (tm?.GetAttrVal("className") ?? "").Split(',')[0] + "." + testName;
+                    var testGuid = testFullName.ToMd5HashGuid();
                     var testInfo = new ItemInfoDto
                     {
                         Start = start,
                         Finish = finish,
-                        Guid = testFullName.ToMd5HashGuid()
+                        Guid = testGuid
                     };
                     var result = utr.GetAttrVal("outcome");
-                    var output = utr.GetNode("Output")?.GetNode("StdOut")?.InnerText ?? "";
-                    var msg = utr.GetNode("Output")?.GetNode("ErrorInfo")?.GetNode("Message")?.InnerText ?? "";
-                    var sTrace = utr.GetNode("Output")?.GetNode("ErrorInfo")?.GetNode("StackTrace")?.InnerText ?? "";
-
+                    var outputNode = utr.GetNode("Output");
+                    var output = outputNode?.GetNode("StdOut")?.InnerText ?? "";
+                    var msg = outputNode?.GetNode("ErrorInfo")?.GetNode("Message")?.InnerText ?? "";
+                    var sTrace = outputNode?.GetNode("ErrorInfo")?.GetNode("StackTrace")?.InnerText ?? "";
+                    
                     var testOutputInfo = new SimpleItemInfoDto
                     {
                         Date = finish,
@@ -88,7 +96,61 @@ namespace Ghpr.MSTestV2
                         SuiteOutput = ""
                     };
 
-                    testRuns.Add(new KeyValuePair<TestRunDto, TestOutputDto>(testRun, testOutput));
+                    var testScreenshots = new List<TestScreenshotDto>();
+                    var resFiles = utr.GetNode("ResultFiles")?.GetNodesList("ResultFile");
+                    foreach (var resFile in resFiles)
+                    {
+                        var relativePath = resFile.GetAttrVal("path");
+                        var fullResFilePath = Path.Combine(
+                            Path.GetDirectoryName(_trxFullPath), deploymentFolder, "In", executionId, relativePath);
+                        if (File.Exists(fullResFilePath))
+                        {
+                            try
+                            {
+                                var ext = Path.GetExtension(fullResFilePath);
+                                if (new[] {"png", "jpg", "jpeg", "bmp"}.Contains(ext.Replace(".","").ToLower()))
+                                {
+                                    var fileInfo = new FileInfo(fullResFilePath);
+                                    var bytes = File.ReadAllBytes(fullResFilePath);
+                                    var base64 = Convert.ToBase64String(bytes);
+                                    var screenInfo = new SimpleItemInfoDto
+                                    {
+                                        Date = fileInfo.CreationTimeUtc,
+                                        ItemName = ""
+                                    };
+                                    var testScreenshotDto = new TestScreenshotDto
+                                    {
+                                        Format = ext.Replace(".", ""),
+                                        TestGuid = testGuid,
+                                        TestScreenshotInfo = screenInfo,
+                                        Base64Data = base64
+                                    };
+                                    testScreenshots.Add(testScreenshotDto);
+                                    testRun.Screenshots.Add(screenInfo);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"Error when trying to add test attachment: {e.Message}{Environment.NewLine}" +
+                                                  $"{e.StackTrace}{Environment.NewLine}" +
+                                                  $"The test XML node is:{Environment.NewLine}" +
+                                                  $"{utr.OuterXml}" + 
+                                                  $"The file path is:{Environment.NewLine}" +
+                                                  $"{fullResFilePath}");
+                            }
+                        }
+                    }
+                    
+                    var ghprTestCase = new GhprTestCase
+                    {
+                        Id = testGuid.ToString(),
+                        ParentId = "",
+                        GhprTestRun = testRun,
+                        GhprTestOutput = testOutput,
+                        GhprTestScreenshots = testScreenshots
+                    };
+
+                    testRuns.Add(ghprTestCase);
 
                 }
                 catch (Exception e)

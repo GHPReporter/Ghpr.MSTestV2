@@ -2,7 +2,7 @@
   "profiles": {
     "ConsoleAppForDebug": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\Evgeniy.Kosjakov\\Downloads\\Report\\TestResults\\yannick_ICDEVSDLC01_2019-11-05_14_40_25.trx"
+      "commandLineArgs": "C:\\Users\\Evgeniy.Kosjakov\\source\\repos\\UnitTestProject1\\UnitTestProject1\\TestResults\\Evgeniy.Kosjakov_UNIT-1248_2020-03-18_17_17_30.trx"
     }
   }
 }
