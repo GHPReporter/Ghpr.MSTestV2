@@ -97,7 +97,7 @@ namespace Ghpr.MSTestV2
                     };
 
                     var testScreenshots = new List<TestScreenshotDto>();
-                    var resFiles = utr.GetNode("ResultFiles")?.GetNodesList("ResultFile");
+                    var resFiles = utr.GetNode("ResultFiles")?.GetNodesList("ResultFile") ?? new List<XmlNode>();
                     foreach (var resFile in resFiles)
                     {
                         var relativePath = resFile.GetAttrVal("path");
