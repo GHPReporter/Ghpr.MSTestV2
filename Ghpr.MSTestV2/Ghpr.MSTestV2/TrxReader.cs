@@ -45,6 +45,9 @@ namespace Ghpr.MSTestV2
                     var executionId = utr.GetAttrVal("executionId");
                     var start = utr.GetDateTimeVal("startTime");
                     var finish = utr.GetDateTimeVal("endTime");
+                    var duration = utr.GetAttrVal("duration");
+                    var durationTimeSpan = new TimeSpan(0);
+                    TimeSpan.TryParse(duration, out durationTimeSpan);
                     var internalTestGuid = utr.GetAttrVal("testId") ?? Guid.NewGuid().ToString();
 
                     var testName = utr.GetAttrVal("testName");
@@ -82,6 +85,7 @@ namespace Ghpr.MSTestV2
                         TestInfo = testInfo,
                         Name = testName,
                         Description = testDesc,
+                        Duration = durationTimeSpan == new TimeSpan(0) ? .0 : durationTimeSpan.TotalSeconds,
                         FullName = testFullName,
                         Result = result,
                         Output = testOutputInfo,
